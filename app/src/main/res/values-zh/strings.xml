@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">法科生</string>
+    <string name="welcome"><xliff:g id="userType">%1$s</xliff:g>,欢迎来到法科生</string>
+    <string name="action_settings">设置</string>
+    <string name="login">登陆</string>
+    <string name="register">注册</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="finish">完成</string>
+    <string name="register_success">注册成功</string>
+    <string name="register_failure">注册失败</string>
+    <string name="login_success">登陆成功</string>
+    <string name="login_failure">登陆失败</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="password_not_same">您两次输入的密码不一致</string>
+    <string name="logout">注销</string>
+    <string name="login_failure_no_account">账户不存在</string>
+    <string name="password_wrong">密码错误</string>
+    <string name="age">年龄</string>
+    <string name="city">城市</string>
+    <string name="gender">性别</string>
+    <string name="phone">手机号</string>
+
+
+
+    <string name="conversation_list">会话列表</string>
+
+    <string name="question_personal">个人问题</string>
+    <string name="question_company">公司问题</string>
+    <string name="ask_text">去提问</string>
+    <string name="question_content_hint">请简短的描述问题</string>
+    <string name="next">下一步</string>
+    <string name="user_type_lawyer">律师</string>
+    <string name="user_type_consultant">咨询</string>
+
+
+    <string name="question_000001">婚姻家庭</string>
+    <string name="question_000002">房屋买卖</string>
+    <string name="question_000004">债务纠纷</string>
+    <string name="question_000008">劳动争议</string>
+    <string name="question_000010">交通肇事</string>
+    <string name="question_000020">刑事案件</string>
+    <string name="question_000040">医疗纠纷</string>
+    <string name="question_000FFF">其他个人问题</string>
+    <string name="question_001000">公司注册</string>
+    <string name="question_002000">投资融资</string>
+    <string name="question_004000">股权期权</string>
+    <string name="question_008000">合同事项</string>
+    <string name="question_010000">知识产权</string>
+    <string name="question_020000">财税事务</string>
+    <string name="question_040000">劳动人事</string>
+    <string name="question_080000">债务纠纷</string>
+    <string name="question_FFF000">其他企业问题</string>
+
+</resources>

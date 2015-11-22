@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="province">
+        <item>北京</item>
+        <item>河南</item>
+    </string-array>
+
+    <string-array name="city_beijing">
+        <item>北京</item>
+    </string-array>
+
+    <string-array name="city_henan">
+        <item>郑州市</item>
+        <item>南阳市</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>男</item>
+        <item>女</item>
+    </string-array>
+
+
+    <string-array name="ques_list_personal">
+        <item>婚姻家庭</item>
+        <item>房屋买卖</item>
+        <item>债务纠纷</item>
+        <item>劳动争议</item>
+        <item>交通肇事</item>
+        <item>刑事案件</item>
+        <item>医疗纠纷</item>
+        <item>其他类型</item>
+    </string-array>
+
+    <string-array name="ques_list_company">
+        <item>公司注册</item>
+        <item>投资融资</item>
+        <item>股权期权</item>
+        <item>合同事项</item>
+        <item>知识产权</item>
+        <item>财税事务</item>
+        <item>劳动人事</item>
+        <item>债务纠纷</item>
+        <item>其他类型</item>
+    </string-array>
+
+</resources>
