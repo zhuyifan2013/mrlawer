@@ -48,12 +48,16 @@ public class QuestionTextView extends TextView {
     private OnClickListener mClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            mIsChecked = !mIsChecked;
-            if (mIsChecked) {
-                QuestionTextView.this.setTextColor(getResources().getColor(R.color.green));
-            } else {
-                QuestionTextView.this.setTextColor(getResources().getColor(R.color.dark));
-            }
+            toggleCheckedStatus();
         }
     };
+
+    public void toggleCheckedStatus() {
+        mIsChecked = !mIsChecked;
+        if (mIsChecked) {
+            QuestionTextView.this.setTextColor(getResources().getColor(R.color.green));
+        } else {
+            QuestionTextView.this.setTextColor(getResources().getColor(R.color.dark));
+        }
+    }
 }

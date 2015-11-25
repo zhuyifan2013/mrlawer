@@ -23,11 +23,12 @@ public class RequestManager {
     private static final String URL_REGISTER = "register";
     private static final String URL_LOGIN = "login";
     private static final String URL_SEND_QUESTION = "sendQuestion";
+    private static final String URL_UPDATE_ACCOUNT = "updateAccount";
 
     public static BasicResponse register(Account account) {
         HttpPost httpPost = new HttpPost(URL_SERVER + URL_REGISTER);
         List<NameValuePair> nameValuePairList = new ArrayList<>();
-        nameValuePairList.add(new BasicNameValuePair(Account.PARAM_USERNAME, account.getUsername()));
+        nameValuePairList.add(new BasicNameValuePair(Account.PARAM_USERNAME, account.getUserName()));
         nameValuePairList.add(new BasicNameValuePair(Account.PARAM_PASSWORD, account.getPassword()));
         nameValuePairList.add(new BasicNameValuePair(Account.PARAM_GENDER, Integer.toString(account.getGender())));
         nameValuePairList.add(new BasicNameValuePair(Account.PARAM_CITY, Integer.toString(account.getCityCode())));
@@ -46,8 +47,20 @@ public class RequestManager {
     public static BasicResponse login(Account account) {
         HttpPost httpPost = new HttpPost(URL_SERVER + URL_LOGIN);
         List<NameValuePair> nameValuePairList = new ArrayList<>();
-        nameValuePairList.add(new BasicNameValuePair(Account.PARAM_USERNAME, account.getUsername()));
+        nameValuePairList.add(new BasicNameValuePair(Account.PARAM_USERNAME, account.getUserName()));
         nameValuePairList.add(new BasicNameValuePair(Account.PARAM_PASSWORD, account.getPassword()));
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairList));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return BasicResponse.makeResponse(realSendRequest(httpPost));
+    }
+
+    public static BasicResponse updateAccountInfo(Account account) {
+        HttpPost httpPost = new HttpPost(URL_SERVER + URL_UPDATE_ACCOUNT);
+        List<NameValuePair> nameValuePairList = new ArrayList<>();
+        nameValuePairList.add(new BasicNameValuePair(Account.PARAM_ACCOUNT_INFO, account.toJson()));
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairList));
         } catch (UnsupportedEncodingException e) {
@@ -58,8 +71,10 @@ public class RequestManager {
 
     public static BasicResponse sendQuestion(Question question) {
         HttpPost httpPost = new HttpPost(URL_SERVER + URL_SEND_QUESTION);
+        List<NameValuePair> nameValuePairList = new ArrayList<>();
+        nameValuePairList.add(new BasicNameValuePair(Question.PARAM_QUESTIONID_INFO, question.toJson()));
         try {
-            httpPost.setEntity(new StringEntity(question.toJson().toString()));
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairList));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

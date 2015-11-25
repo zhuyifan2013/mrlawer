@@ -85,7 +85,7 @@ public class LoginFragment extends Fragment {
         mFinishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAccount.setUsername(mUsernameEt.getText().toString());
+                mAccount.setUserName(mUsernameEt.getText().toString());
                 mAccount.setPassword(Coder.encodePassword(mUsernameEt.getText().toString(), mPasswordEt.getText()
                         .toString()));
                 new Thread(new Runnable() {

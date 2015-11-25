@@ -35,6 +35,8 @@ public class Account implements Parcelable {
     public static final int USER_TYPE_LAWER = 1; //法科生
     public static final int USER_TYPE_CONSULTANT = 2; //普通用户
 
+    public static final String PARAM_ACCOUNT_INFO = "accountInfo";
+
     public static final String PARAM_USERID = "userId";
     public static final String PARAM_TOKEN = "token";
     public static final String PARAM_USERNAME = "username";
@@ -46,10 +48,11 @@ public class Account implements Parcelable {
     public static final String PARAM_COLLEGE = "college";
     public static final String PARAM_EDUCATION = "education";
     public static final String PARAM_USER_TYPE = "userType";
+    public static final String PARAM_FAMILIAR_AREA = "familiarArea";
 
     private int mUserId;
     private String mToken;
-    private String mUsername;
+    private String mUserName;
     private String mPassword;
     private int mCityCode;
     private String mNickName;
@@ -58,6 +61,15 @@ public class Account implements Parcelable {
     private int mUserType;
     private String mCollege;
     private String mEducation;
+    private int mFamiliarArea;
+
+    public int getFamiliarArea() {
+        return mFamiliarArea;
+    }
+
+    public void setFamiliarArea(int familiarArea) {
+        mFamiliarArea = familiarArea;
+    }
 
     public String getEducation() {
         return mEducation;
@@ -107,12 +119,12 @@ public class Account implements Parcelable {
         this.mAge = age;
     }
 
-    public String getUsername() {
-        return mUsername;
+    public String getUserName() {
+        return mUserName;
     }
 
-    public void setUsername(String mUsername) {
-        this.mUsername = mUsername;
+    public void setUserName(String mUsername) {
+        this.mUserName = mUsername;
     }
 
     public int getId() {
@@ -148,7 +160,7 @@ public class Account implements Parcelable {
     }
 
     public boolean isValid() {
-        return !TextUtils.isEmpty(mUsername) && !TextUtils.isEmpty(mPassword);
+        return !TextUtils.isEmpty(mUserName) && !TextUtils.isEmpty(mPassword);
     }
 
     @Override
@@ -160,7 +172,7 @@ public class Account implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.mUserId);
         dest.writeString(this.mToken);
-        dest.writeString(this.mUsername);
+        dest.writeString(this.mUserName);
         dest.writeString(this.mPassword);
         dest.writeInt(this.mCityCode);
         dest.writeString(this.mNickName);
@@ -169,15 +181,17 @@ public class Account implements Parcelable {
         dest.writeInt(this.mUserType);
         dest.writeString(this.mCollege);
         dest.writeString(this.mEducation);
+        dest.writeInt(this.mFamiliarArea);
     }
 
     public Account() {
+        this.mUserType = -1;
     }
 
     protected Account(Parcel in) {
         this.mUserId = in.readInt();
         this.mToken = in.readString();
-        this.mUsername = in.readString();
+        this.mUserName = in.readString();
         this.mPassword = in.readString();
         this.mCityCode = in.readInt();
         this.mNickName = in.readString();
@@ -186,6 +200,7 @@ public class Account implements Parcelable {
         this.mUserType = in.readInt();
         this.mCollege = in.readString();
         this.mEducation = in.readString();
+        this.mFamiliarArea = in.readInt();
     }
 
     public static final Creator<Account> CREATOR = new Creator<Account>() {
@@ -198,12 +213,33 @@ public class Account implements Parcelable {
         }
     };
 
+    public String toJson() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(PARAM_USERID, mUserId);
+            jsonObject.put(PARAM_TOKEN, mToken);
+            jsonObject.put(PARAM_USERNAME, mUserName);
+            jsonObject.put(PARAM_PASSWORD, mPassword);
+            jsonObject.put(PARAM_CITY, mCityCode);
+            jsonObject.put(PARAM_NICKNAME, mNickName);
+            jsonObject.put(PARAM_GENDER, mGender);
+            jsonObject.put(PARAM_AGE, mAge);
+            jsonObject.put(PARAM_USER_TYPE, mUserType);
+            jsonObject.put(PARAM_COLLEGE, mCollege);
+            jsonObject.put(PARAM_EDUCATION, mEducation);
+            jsonObject.put(PARAM_FAMILIAR_AREA, mFamiliarArea);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject.toString();
+    }
+
     public void fillSelf(String rawJson) {
         try {
             JSONObject jsonObject = new JSONObject(rawJson);
             this.setId(jsonObject.getInt(PARAM_USERID));
             this.setToken(jsonObject.getString(PARAM_TOKEN));
-            this.setUsername(jsonObject.getString(PARAM_USERNAME));
+            this.setUserName(jsonObject.getString(PARAM_USERNAME));
             this.setPassword(jsonObject.getString(PARAM_PASSWORD));
             this.setmNickName(jsonObject.getString(PARAM_NICKNAME));
             this.setGender(jsonObject.getInt(PARAM_GENDER));
@@ -212,8 +248,10 @@ public class Account implements Parcelable {
             this.setUserType(jsonObject.getInt(PARAM_USER_TYPE));
             this.setCollege(jsonObject.getString(PARAM_COLLEGE));
             this.setEducation(jsonObject.getString(PARAM_EDUCATION));
+            this.setFamiliarArea(jsonObject.getInt(PARAM_FAMILIAR_AREA));
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
 }

@@ -87,6 +87,8 @@ public class UserHomePageFragment extends Fragment {
             public void onClick(View v) {
                 //TODO problem
                 AccountManager.updateCurAccount(getActivity(), new Account());
+                startActivity(new Intent(getActivity(), MainActivity.class));
+                getActivity().finish();
             }
         });
 
@@ -129,7 +131,7 @@ public class UserHomePageFragment extends Fragment {
     private void checkLoginStatus() {
         if (mAccount.isValid()) {
             mRegisterBtn.setVisibility(View.GONE);
-            mLoginBtn.setText("已登陆，用户名为" + mAccount.getUsername());
+            mLoginBtn.setText("已登陆，用户名为" + mAccount.getUserName());
             mLoginBtn.setEnabled(false);
             mLogoutBtn.setVisibility(View.VISIBLE);
         } else {

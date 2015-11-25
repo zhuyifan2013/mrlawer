@@ -8,6 +8,7 @@ import org.json.JSONObject;
  */
 public class Question {
 
+    public static final String PARAM_QUESTIONID_INFO = "questionInfo";
     public static final String PARAM_QUESTIONID = "questionID";
     public static final String PARAM_USERID = "userID";
     public static final String PARAM_TYPE = "type";
@@ -110,7 +111,7 @@ public class Question {
         mStar = star;
     }
 
-    public JSONObject toJson() {
+    public String toJson() {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put(PARAM_QUESTIONID, this.mQuestionID);
@@ -126,7 +127,7 @@ public class Question {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return jsonObject;
+        return jsonObject.toString();
     }
 }
 

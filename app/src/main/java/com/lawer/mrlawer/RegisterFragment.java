@@ -199,7 +199,7 @@ public class RegisterFragment extends Fragment {
                     mHandler.obtainMessage(MSG_PASSWORD_NOT_SAME).sendToTarget();
                     return;
                 }
-                mAccount.setUsername(mUsername);
+                mAccount.setUserName(mUsername);
                 mAccount.setPassword(Coder.encodePassword(mUsername, mPassword));
                 mAccount.setGender(mGender);
                 mAccount.setCityCode(mCity);

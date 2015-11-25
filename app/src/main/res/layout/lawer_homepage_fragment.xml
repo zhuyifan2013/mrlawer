@@ -11,6 +11,7 @@
         android:text="您擅长的领域"/>
 
     <TextView
+        android:id="@+id/skilled_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -21,12 +22,20 @@
         android:text="修改擅长领域"/>
 
     <Button
+        android:id="@+id/info_center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="消息中心"/>
 
     <Button
+        android:id="@+id/change_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="修改个人资料"/>
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="注销"/>
+
 </LinearLayout>

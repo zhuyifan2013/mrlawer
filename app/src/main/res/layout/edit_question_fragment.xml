@@ -21,4 +21,27 @@
         android:layout_height="wrap_content"
         android:text="@string/next"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="个人问题"/>
+
+    <GridLayout
+        android:id="@+id/personal_question_set"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:alignmentMode="alignBounds"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="企业问题"/>
+
+    <GridLayout
+        android:id="@+id/company_question_set"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="4"/>
+
 </LinearLayout>
