@@ -1,8 +1,12 @@
 package com.lawer.mrlawer;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +21,22 @@ import java.util.List;
 public class LawerHomePageFragment extends Fragment {
 
 
-    private Button mChangeQuestionSetBtn, mLogoutBtn;
+    private Button mChangeQuestionSetBtn, mLogoutBtn, mRegisterBtn, mLoginBtn;
     private TextView mSkilledTv;
     private Account mAccount = AccountManager.getCurAccount();
+    private CurAccountUpdateReceiver mCurAccountUpdateReceiver;
+
+    public static final String KEY_REQUEST_TYPE = "request_type";
+    public static final int REQUEST_TYPE_LOGIN = 1;
+    public static final int REQUEST_TYPE_REGISTER = 2;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mCurAccountUpdateReceiver = new CurAccountUpdateReceiver();
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mCurAccountUpdateReceiver, new IntentFilter
+                (AccountManager.ACTION_CUR_ACCOUNT_UPDATE));
     }
 
     @Override
@@ -32,12 +45,15 @@ public class LawerHomePageFragment extends Fragment {
         mChangeQuestionSetBtn = (Button) view.findViewById(R.id.change_question_set);
         mSkilledTv = (TextView) view.findViewById(R.id.skilled_area);
         mLogoutBtn = (Button) view.findViewById(R.id.logout);
+        mRegisterBtn = (Button) view.findViewById(R.id.register);
+        mLoginBtn = (Button) view.findViewById(R.id.login);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        final Intent intent = new Intent(getActivity(), AccountActivity.class);
         mChangeQuestionSetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +68,21 @@ public class LawerHomePageFragment extends Fragment {
                 getActivity().finish();
             }
         });
+        mRegisterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra(KEY_REQUEST_TYPE, REQUEST_TYPE_REGISTER);
+                startActivity(intent);
+            }
+        });
+        mLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra(KEY_REQUEST_TYPE, REQUEST_TYPE_LOGIN);
+                startActivity(intent);
+            }
+        });
+        checkLoginStatus();
     }
 
     @Override
@@ -72,5 +103,34 @@ public class LawerHomePageFragment extends Fragment {
             showString += " ";
         }
         mSkilledTv.setText(showString);
+
+    }
+
+    @Override
+    public void onDestroy() {
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mCurAccountUpdateReceiver);
+        super.onDestroy();
+    }
+
+    private class CurAccountUpdateReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            checkLoginStatus();
+        }
+    }
+
+    private void checkLoginStatus() {
+        mAccount = AccountManager.getCurAccount();
+        if (mAccount.isValid()) {
+            mRegisterBtn.setVisibility(View.GONE);
+            mLoginBtn.setText("已登陆，用户名为" + mAccount.getUserName());
+            mLoginBtn.setEnabled(false);
+            mLogoutBtn.setVisibility(View.VISIBLE);
+        } else {
+            mRegisterBtn.setVisibility(View.VISIBLE);
+            mLoginBtn.setText(R.string.login);
+            mLoginBtn.setEnabled(true);
+            mLogoutBtn.setVisibility(View.GONE);
+        }
     }
 }

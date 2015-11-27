@@ -3,9 +3,6 @@ package com.lawer.mrlawer.entity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by yifan on 15-11-8.
- */
 public class Question {
 
     public static final String PARAM_QUESTIONID_INFO = "questionInfo";
@@ -128,6 +125,24 @@ public class Question {
             e.printStackTrace();
         }
         return jsonObject.toString();
+    }
+
+    public void fillFromJson(String rawJson) {
+        try {
+            JSONObject jsonObject = new JSONObject(rawJson);
+            this.setQuestionID(jsonObject.getInt(PARAM_QUESTIONID));
+            this.setUserID(jsonObject.getInt(PARAM_USERID));
+            this.setQuestionType(jsonObject.getInt(PARAM_TYPE));
+            this.setTimeStart(jsonObject.getLong(PARAM_TIMESTART));
+            this.setTimeEnd(jsonObject.getLong(PARAM_TIMEEND));
+            this.setText(jsonObject.getString(PARAM_TEXT));
+            this.setUrl(jsonObject.getString(PARAM_URL));
+            this.setStatus(jsonObject.getInt(PARAM_STATUS));
+            this.setLawerID(jsonObject.getInt(PARAM_LAWERID));
+            this.setStar(jsonObject.getInt(PARAM_STAR));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
 

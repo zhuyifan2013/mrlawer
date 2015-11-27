@@ -1,38 +1,66 @@
 package com.lawer.mrlawer;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
-import io.rong.imkit.fragment.ConversationListFragment;
+import java.util.Locale;
+
+import io.rong.imkit.fragment.ConversationFragment;
 import io.rong.imlib.model.Conversation;
 
-/**
- * Created by yifan on 15-10-23.
- */
 public class ConversationActivity extends FragmentActivity {
+    /**
+     * 目标 Id
+     */
+    private String mTargetId;
+
+    /**
+     * 刚刚创建完讨论组后获得讨论组的id 为targetIds，需要根据 为targetIds 获取 targetId
+     */
+    private String mTargetIds;
+
+    /**
+     * 会话类型
+     */
+    private Conversation.ConversationType mConversationType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.conversition_list_activity);
-        enterFragment();
+        setContentView(R.layout.conversition_fragment);
+        Intent intent = getIntent();
+
+        getIntentDate(intent);
     }
 
     /**
-     * 加载 会话列表 ConversationListFragment
+     * 展示如何从 Intent 中得到 融云会话页面传递的 Uri
      */
-    private void enterFragment() {
+    private void getIntentDate(Intent intent) {
 
-        ConversationListFragment fragment = (ConversationListFragment) getSupportFragmentManager().findFragmentById(R.id.conversationlist);
+        mTargetId = intent.getData().getQueryParameter("targetId");
+        mTargetIds = intent.getData().getQueryParameter("targetIds");
+        //intent.getData().getLastPathSegment();//获得当前会话类型
+        mConversationType = Conversation.ConversationType.valueOf(intent.getData().getLastPathSegment().toUpperCase(Locale.getDefault()));
+
+        enterFragment(mConversationType, mTargetId);
+    }
+
+    /**
+     * 加载会话页面 ConversationFragment
+     *
+     * @param mConversationType 会话类型
+     * @param mTargetId 目标 Id
+     */
+    private void enterFragment(Conversation.ConversationType mConversationType, String mTargetId) {
+
+        ConversationFragment fragment = (ConversationFragment) getSupportFragmentManager().findFragmentById(R.id.conversation);
 
         Uri uri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon()
-                .appendPath("conversationlist")
-                .appendQueryParameter(Conversation.ConversationType.PRIVATE.getName(), "false") //设置私聊会话非聚合显示
-                .appendQueryParameter(Conversation.ConversationType.GROUP.getName(), "true")//设置群组会话聚合显示
-                .appendQueryParameter(Conversation.ConversationType.DISCUSSION.getName(), "false")//设置讨论组会话非聚合显示
-                .appendQueryParameter(Conversation.ConversationType.SYSTEM.getName(), "false")//设置系统会话非聚合显示
-                .build();
+                .appendPath("conversation").appendPath(mConversationType.getName().toLowerCase())
+                .appendQueryParameter("targetId", mTargetId).build();
 
         fragment.setUri(uri);
     }

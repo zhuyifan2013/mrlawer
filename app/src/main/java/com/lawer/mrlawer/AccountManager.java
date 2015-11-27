@@ -19,16 +19,16 @@ public class AccountManager {
      */
     public static void initAccount(Context context) {
         mCurAccount.setId(SysUtil.getInt(context, Account.PARAM_USERID, -1));
-        mCurAccount.setToken(SysUtil.getString(context, Account.PARAM_TOKEN, null));
-        mCurAccount.setUserName(SysUtil.getString(context, Account.PARAM_USERNAME, null));
-        mCurAccount.setPassword(SysUtil.getString(context, Account.PARAM_PASSWORD, null));
+        mCurAccount.setToken(SysUtil.getString(context, Account.PARAM_TOKEN, ""));
+        mCurAccount.setUserName(SysUtil.getString(context, Account.PARAM_USERNAME, ""));
+        mCurAccount.setPassword(SysUtil.getString(context, Account.PARAM_PASSWORD, ""));
         mCurAccount.setCityCode(SysUtil.getInt(context, Account.PARAM_CITY, -1));
-        mCurAccount.setmNickName(SysUtil.getString(context, Account.PARAM_NICKNAME, null));
+        mCurAccount.setmNickName(SysUtil.getString(context, Account.PARAM_NICKNAME, ""));
         mCurAccount.setGender(SysUtil.getInt(context, Account.PARAM_GENDER, -1));
         mCurAccount.setAge(SysUtil.getInt(context, Account.PARAM_AGE, -1));
         mCurAccount.setUserType(SysUtil.getInt(context, Account.PARAM_USER_TYPE, -1));
-        mCurAccount.setCollege(SysUtil.getString(context, Account.PARAM_COLLEGE, null));
-        mCurAccount.setEducation(SysUtil.getString(context, Account.PARAM_EDUCATION, null));
+        mCurAccount.setCollege(SysUtil.getString(context, Account.PARAM_COLLEGE, ""));
+        mCurAccount.setEducation(SysUtil.getString(context, Account.PARAM_EDUCATION, ""));
         mCurAccount.setFamiliarArea(SysUtil.getInt(context, Account.PARAM_FAMILIAR_AREA, -1));
     }
 

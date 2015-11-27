@@ -1,6 +1,8 @@
 package com.lawer.mrlawer;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,7 +12,11 @@ import android.widget.Button;
 import android.widget.GridLayout;
 
 import com.lawer.mrlawer.entity.Account;
+import com.lawer.mrlawer.network.BasicResponse;
+import com.lawer.mrlawer.network.RequestManager;
+import com.lawer.mrlawer.network.ResultCode;
 import com.lawer.mrlawer.util.QuestionUtil;
+import com.lawer.mrlawer.util.UiUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +28,25 @@ public class PickQuestionSetFragment extends Fragment {
     private Button mFinishBtn;
     private List<QuestionTextView> mTextviewList;
     private int mQuestionSet;
+    private Account mCuAccount = AccountManager.getCurAccount();
+    private static final int MSG_SUCCESS = 0;
+    private static final int MSG_FAILURE = 1;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_SUCCESS:
+                    UiUtil.showToast(getActivity(), "更新成功");
+                    AccountManager.updateCurAccount(getActivity(), mCuAccount);
+                    getActivity().finish();
+                    break;
+                case MSG_FAILURE:
+                    UiUtil.showToast(getActivity(), "更新失败，请重试");
+                    break;
+            }
+        }
+    };
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,20 +73,22 @@ public class PickQuestionSetFragment extends Fragment {
                 for (QuestionTextView textView : mTextviewList) {
                     if (textView.isChecked()) {
                         mQuestionSet += textView.getQuestionValue();
-                        Account account = AccountManager.getCurAccount();
-                        account.setFamiliarArea(mQuestionSet);
-                        AccountManager.updateCurAccount(getActivity(), account);
-                        getActivity().finish();
+                        mCuAccount.setFamiliarArea(mQuestionSet);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                BasicResponse basicResponse = RequestManager.updateAccountInfo(mCuAccount);
+                                if(basicResponse.getResultCode() == ResultCode.RESULT_OK) {
+                                    mHandler.obtainMessage(MSG_SUCCESS).sendToTarget();
+                                } else {
+                                    mHandler.obtainMessage(MSG_FAILURE).sendToTarget();
+                                }
+                            }
+                        }).start();
                     }
                 }
-
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
         for (Map.Entry<Integer, Integer> entry : QuestionUtil.sQuestionResMap.entrySet()) {
             int key = entry.getKey();
             QuestionTextView textView = new QuestionTextView(getActivity());
@@ -75,4 +102,5 @@ public class PickQuestionSetFragment extends Fragment {
             mTextviewList.add(textView);
         }
     }
+
 }

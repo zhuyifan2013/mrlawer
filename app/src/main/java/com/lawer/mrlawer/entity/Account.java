@@ -185,7 +185,18 @@ public class Account implements Parcelable {
     }
 
     public Account() {
+        this.mUserId = -1;
         this.mUserType = -1;
+        this.mToken = "";
+        this.mUserName = "";
+        this.mPassword = "";
+        this.mCityCode = -1;
+        this.mNickName = "";
+        this.mGender = 0;
+        this.mAge = -1;
+        this.mCollege = "";
+        this.mEducation = "";
+        this.mFamiliarArea = -1;
     }
 
     protected Account(Parcel in) {

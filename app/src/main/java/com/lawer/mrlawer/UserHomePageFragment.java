@@ -95,7 +95,7 @@ public class UserHomePageFragment extends Fragment {
         mConListBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RongyunRequest.connect(getActivity(), mAccount.getToken(), ConversationActivity.class);
+                RongyunRequest.connect(getActivity(), mAccount.getToken(), ConversationListActivity.class);
             }
         });
         checkLoginStatus();
