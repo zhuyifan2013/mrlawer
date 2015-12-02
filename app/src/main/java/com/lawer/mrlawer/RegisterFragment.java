@@ -28,6 +28,7 @@ import com.lawer.mrlawer.util.Coder;
 import com.lawer.mrlawer.util.UiUtil;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +55,11 @@ public class RegisterFragment extends Fragment {
             switch (msg.what) {
                 case MSG_REGISTER_SUCCESS:
                     UiUtil.showToast(getActivity(), R.string.register_success);
+                    try {
+                        mAccount.fillSelf(((JSONObject)msg.obj).getString(Account.PARAM_ACCOUNT_INFO));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     AccountManager.updateCurAccount(getActivity(), mAccount);
                     getActivity().finish();
                     break;
@@ -208,17 +214,13 @@ public class RegisterFragment extends Fragment {
                     @Override
                     public void run() {
                         BasicResponse response = RequestManager.register(mAccount);
-                        if(response == null) {
+                        if (response == null) {
                             mHandler.obtainMessage(MSG_REGISTER_FAILURE).sendToTarget();
                             return;
                         }
-                        try {
-                            mAccount.fillSelf(response.getData().getString(Constants.KEY_ACCOUNT_INFO));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
                         if (response.getResultCode() == ResultCode.RESULT_OK) {
-                            mHandler.obtainMessage(MSG_REGISTER_SUCCESS).sendToTarget();
+
+                            mHandler.obtainMessage(MSG_REGISTER_SUCCESS, response.getData()).sendToTarget();
                         } else {
                             mHandler.obtainMessage(MSG_REGISTER_FAILURE).sendToTarget();
                         }

@@ -18,18 +18,18 @@ public class AccountManager {
      * 检查SharedPreference里有没有登录信息
      */
     public static void initAccount(Context context) {
-        mCurAccount.setId(SysUtil.getInt(context, Account.PARAM_USERID, -1));
+        mCurAccount.setId(SysUtil.getInt(context, Account.PARAM_USERID, 0));
         mCurAccount.setToken(SysUtil.getString(context, Account.PARAM_TOKEN, ""));
         mCurAccount.setUserName(SysUtil.getString(context, Account.PARAM_USERNAME, ""));
         mCurAccount.setPassword(SysUtil.getString(context, Account.PARAM_PASSWORD, ""));
-        mCurAccount.setCityCode(SysUtil.getInt(context, Account.PARAM_CITY, -1));
+        mCurAccount.setCityCode(SysUtil.getInt(context, Account.PARAM_CITY, 0));
         mCurAccount.setmNickName(SysUtil.getString(context, Account.PARAM_NICKNAME, ""));
-        mCurAccount.setGender(SysUtil.getInt(context, Account.PARAM_GENDER, -1));
-        mCurAccount.setAge(SysUtil.getInt(context, Account.PARAM_AGE, -1));
-        mCurAccount.setUserType(SysUtil.getInt(context, Account.PARAM_USER_TYPE, -1));
+        mCurAccount.setGender(SysUtil.getInt(context, Account.PARAM_GENDER, 0));
+        mCurAccount.setAge(SysUtil.getInt(context, Account.PARAM_AGE, 0));
+        mCurAccount.setUserType(SysUtil.getInt(context, Account.PARAM_USER_TYPE, 0));
         mCurAccount.setCollege(SysUtil.getString(context, Account.PARAM_COLLEGE, ""));
         mCurAccount.setEducation(SysUtil.getString(context, Account.PARAM_EDUCATION, ""));
-        mCurAccount.setFamiliarArea(SysUtil.getInt(context, Account.PARAM_FAMILIAR_AREA, -1));
+        mCurAccount.setFamiliarArea(SysUtil.getInt(context, Account.PARAM_FAMILIAR_AREA, 0));
     }
 
     public static void updateCurAccount(Context context, Account account) {

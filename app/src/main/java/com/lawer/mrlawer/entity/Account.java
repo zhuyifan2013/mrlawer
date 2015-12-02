@@ -185,18 +185,18 @@ public class Account implements Parcelable {
     }
 
     public Account() {
-        this.mUserId = -1;
-        this.mUserType = -1;
+        this.mUserId = 0;
+        this.mUserType = 0;
         this.mToken = "";
         this.mUserName = "";
         this.mPassword = "";
-        this.mCityCode = -1;
+        this.mCityCode = 0;
         this.mNickName = "";
         this.mGender = 0;
-        this.mAge = -1;
+        this.mAge = 0;
         this.mCollege = "";
         this.mEducation = "";
-        this.mFamiliarArea = -1;
+        this.mFamiliarArea = 0;
     }
 
     protected Account(Parcel in) {
@@ -255,7 +255,7 @@ public class Account implements Parcelable {
             this.setmNickName(jsonObject.getString(PARAM_NICKNAME));
             this.setGender(jsonObject.getInt(PARAM_GENDER));
             this.setCityCode(jsonObject.getInt(PARAM_USERID));
-            this.setAge(jsonObject.getInt(PARAM_USERID));
+            this.setAge(jsonObject.getInt(PARAM_AGE));
             this.setUserType(jsonObject.getInt(PARAM_USER_TYPE));
             this.setCollege(jsonObject.getString(PARAM_COLLEGE));
             this.setEducation(jsonObject.getString(PARAM_EDUCATION));
