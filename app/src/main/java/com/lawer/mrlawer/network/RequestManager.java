@@ -19,7 +19,7 @@ import java.util.List;
 
 public class RequestManager {
 
-    protected static final String URL_SERVER = "http://10.235.118.119:8080/";
+    protected static final String URL_SERVER = "http://192.168.155.5:8080/";
     private static final String URL_REGISTER = "register";
     private static final String URL_LOGIN = "login";
     private static final String URL_SEND_QUESTION = "sendQuestion";

@@ -18,10 +18,12 @@ import com.lawer.mrlawer.util.QuestionUtil;
 
 import java.util.List;
 
-public class LawerHomePageFragment extends Fragment {
+import io.rong.imkit.RongIM;
+
+public class LawerHomePageFragment extends BaseFragment {
 
 
-    private Button mChangeQuestionSetBtn, mLogoutBtn, mRegisterBtn, mLoginBtn;
+    private Button mChangeQuestionSetBtn, mLogoutBtn, mRegisterBtn, mLoginBtn, mInfoBtn;
     private TextView mSkilledTv;
     private Account mAccount = AccountManager.getCurAccount();
     private CurAccountUpdateReceiver mCurAccountUpdateReceiver;
@@ -47,6 +49,7 @@ public class LawerHomePageFragment extends Fragment {
         mLogoutBtn = (Button) view.findViewById(R.id.logout);
         mRegisterBtn = (Button) view.findViewById(R.id.register);
         mLoginBtn = (Button) view.findViewById(R.id.login);
+        mInfoBtn = (Button) view.findViewById(R.id.info_center);
         return view;
     }
 
@@ -80,6 +83,14 @@ public class LawerHomePageFragment extends Fragment {
             public void onClick(View v) {
                 intent.putExtra(KEY_REQUEST_TYPE, REQUEST_TYPE_LOGIN);
                 startActivity(intent);
+            }
+        });
+        mInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (RongIM.getInstance() != null) {
+                    RongIM.getInstance().startConversationList(getActivity());
+                }
             }
         });
         checkLoginStatus();

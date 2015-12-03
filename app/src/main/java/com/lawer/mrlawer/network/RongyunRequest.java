@@ -9,15 +9,16 @@ import com.lawer.mrlawer.MyApp;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Message;
+import io.rong.message.TextMessage;
 
 public class RongyunRequest {
 
     /**
-     *
      * @param context activity context
-     * @param token token from Rongyun
+     * @param token   token from Rongyun
      */
-    public static void connect( final Activity context, String token , final Class objClass) {
+    public static void connect(final Activity context, String token, final Class objClass) {
         if (context.getApplicationInfo().packageName.equals(MyApp.getCurProcessName(context))) {
 
             /**
@@ -60,13 +61,14 @@ public class RongyunRequest {
     }
 
     /**
-     *
      * @param context activity context
-     * @param token token from Rongyun
+     * @param token   token from Rongyun
      */
-    public static void connect( final Context context, String token) {
+    public static void connect(final Context context, String token) {
+        Log.i("yifan", "in connect token is : " + token);
+        Log.i("yifan", "context.getApplicationInfo().packageName is : " + context.getApplicationInfo().packageName + "  MyApp.getCurProcessName is : " + MyApp.getCurProcessName(context));
         if (context.getApplicationInfo().packageName.equals(MyApp.getCurProcessName(context))) {
-
+            Log.i("yifan", "package name is same");
             /**
              * IMKit SDK调用第二步,建立与服务器的连接
              */
@@ -89,6 +91,10 @@ public class RongyunRequest {
                 public void onSuccess(String userid) {
 
                     Log.d("yifan", "--onSuccess" + userid);
+                    if (RongIM.getInstance() != null) {
+                        //设置自己发出的消息监听器。
+                        RongIM.getInstance().setSendMessageListener(new MySendMessageListener());
+                    }
                 }
 
                 /**
@@ -103,4 +109,20 @@ public class RongyunRequest {
             });
         }
     }
+
+    private static class MySendMessageListener implements RongIM.OnSendMessageListener {
+
+        @Override
+        public Message onSend(Message message) {
+            Log.i("yifan", "onSend");
+            return message;
+        }
+
+        @Override
+        public boolean onSent(Message message, RongIM.SentMessageErrorCode sentMessageErrorCode) {
+            Log.i("yifan", "messge content is " + ((TextMessage) message.getContent()).getContent());
+            return false;
+        }
+    }
+
 }

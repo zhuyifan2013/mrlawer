@@ -15,16 +15,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int userType = SysUtil.getInt(this, Account.PARAM_USER_TYPE, -1);
+        int userType = SysUtil.getInt(this, Account.PARAM_USER_TYPE, Account.USER_TYPE_DEFAULT);
         switch (userType) {
             case Account.USER_TYPE_DEFAULT:
                 startActivity(new Intent(this, ChooseUserTypeActivity.class));
-                return;
+                finish();
+                break;
             case Account.USER_TYPE_LAWER:
                 UiUtil.replaceFragment(this, new LawerHomePageFragment());
-                return;
+                break;
             case Account.USER_TYPE_CONSULTANT:
                 UiUtil.replaceFragment(this, new UserHomePageFragment());
+                break;
         }
     }
 
@@ -48,5 +50,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

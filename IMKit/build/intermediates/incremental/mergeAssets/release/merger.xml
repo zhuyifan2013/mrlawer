@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/yifan/Documents/android_projects/MrLawer/IMKit/src/main/assets"/></dataSet><dataSet config="release"><source path="/home/yifan/Documents/android_projects/MrLawer/IMKit/src/release/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/home/yifan/Documents/anroid_projects/mrlawer/IMKit/src/main/assets"/></dataSet><dataSet config="release"><source path="/home/yifan/Documents/anroid_projects/mrlawer/IMKit/src/release/assets"/></dataSet></merger>

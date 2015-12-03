@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class PickQuestionSetFragment extends Fragment {
+public class PickQuestionSetFragment extends BaseFragment {
 
     private GridLayout mPersonLayout, mCompanyLayout;
     private Button mFinishBtn;
@@ -35,6 +35,9 @@ public class PickQuestionSetFragment extends Fragment {
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            if(mProgrssDialog.isShowing()) {
+                mProgrssDialog.dismiss();
+            }
             switch (msg.what) {
                 case MSG_SUCCESS:
                     UiUtil.showToast(getActivity(), "更新成功");
@@ -70,6 +73,7 @@ public class PickQuestionSetFragment extends Fragment {
         mFinishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgrssDialog.show();
                 for (QuestionTextView textView : mTextviewList) {
                     if (textView.isChecked()) {
                         mQuestionSet += textView.getQuestionValue();

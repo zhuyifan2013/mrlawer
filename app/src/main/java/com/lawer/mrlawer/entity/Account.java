@@ -31,7 +31,7 @@ public class Account implements Parcelable {
     /**
      * 用户类型
      */
-    public static final int USER_TYPE_DEFAULT = -1; //未设置
+    public static final int USER_TYPE_DEFAULT = 0; //未设置
     public static final int USER_TYPE_LAWER = 1; //法科生
     public static final int USER_TYPE_CONSULTANT = 2; //普通用户
 

@@ -13,4 +13,4 @@
         android:drawable="@drawable/rc_ic_voice_receive_play3"
         android:duration="300"/>
 
-</animation-list><!-- From: file:/home/yifan/Documents/android_projects/MrLawer/IMKit/src/main/res/drawable/rc_an_voice_receive.xml --><!-- From: file:/home/yifan/Documents/android_projects/MrLawer/IMKit/build/intermediates/bundles/debug/res/drawable/rc_an_voice_receive.xml -->
+</animation-list><!-- From: file:/home/yifan/Documents/anroid_projects/mrlawer/IMKit/src/main/res/drawable/rc_an_voice_receive.xml --><!-- From: file:/home/yifan/Documents/anroid_projects/mrlawer/IMKit/build/intermediates/bundles/debug/res/drawable/rc_an_voice_receive.xml -->

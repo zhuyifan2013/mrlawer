@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class EditQuestionFragment extends Fragment {
+public class EditQuestionFragment extends BaseFragment {
 
     private Button mNextBtn;
     private EditText mQuestionEt;
@@ -41,6 +41,9 @@ public class EditQuestionFragment extends Fragment {
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            if(mProgrssDialog.isShowing()) {
+                mProgrssDialog.dismiss();
+            }
             switch (msg.what) {
                 case MSG_SEND_SUCCESS:
                     UiUtil.showToast(getActivity(), "发送成功");
@@ -79,6 +82,7 @@ public class EditQuestionFragment extends Fragment {
         mNextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgrssDialog.show();
                 mQuestion.setUserID(AccountManager.getCurAccount().getId());
                 mQuestion.setQuestionType(mCheckedQuestionTv.getQuestionValue());
                 mQuestion.setText(mQuestionEt.getText().toString());

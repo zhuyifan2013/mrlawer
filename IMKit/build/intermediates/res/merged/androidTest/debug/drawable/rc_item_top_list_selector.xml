@@ -9,4 +9,4 @@
     <!-- Pressed -->
     <item android:drawable="@color/rc_conversation_top_bg" android:state_pressed="true"/>
 
-</selector><!-- From: file:/home/yifan/Documents/android_projects/MrLawer/IMKit/src/main/res/drawable/rc_item_top_list_selector.xml --><!-- From: file:/home/yifan/Documents/android_projects/MrLawer/IMKit/build/intermediates/bundles/debug/res/drawable/rc_item_top_list_selector.xml -->
+</selector><!-- From: file:/home/yifan/Documents/anroid_projects/mrlawer/IMKit/src/main/res/drawable/rc_item_top_list_selector.xml --><!-- From: file:/home/yifan/Documents/anroid_projects/mrlawer/IMKit/build/intermediates/bundles/debug/res/drawable/rc_item_top_list_selector.xml -->

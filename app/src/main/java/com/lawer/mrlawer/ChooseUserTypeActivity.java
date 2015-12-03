@@ -35,5 +35,6 @@ public class ChooseUserTypeActivity extends AppCompatActivity implements View.On
                 startActivity(new Intent(this, MainActivity.class));
                 break;
         }
+        finish();
     }
 }

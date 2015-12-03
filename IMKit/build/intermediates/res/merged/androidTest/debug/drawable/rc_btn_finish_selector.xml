@@ -9,4 +9,4 @@
     <!-- Pressed -->
     <item android:drawable="@drawable/rc_call_over_down" android:state_pressed="true"/>
 
-</selector><!-- From: file:/home/yifan/Documents/android_projects/MrLawer/IMKit/src/main/res/drawable/rc_btn_finish_selector.xml --><!-- From: file:/home/yifan/Documents/android_projects/MrLawer/IMKit/build/intermediates/bundles/debug/res/drawable/rc_btn_finish_selector.xml -->
+</selector><!-- From: file:/home/yifan/Documents/anroid_projects/mrlawer/IMKit/src/main/res/drawable/rc_btn_finish_selector.xml --><!-- From: file:/home/yifan/Documents/anroid_projects/mrlawer/IMKit/build/intermediates/bundles/debug/res/drawable/rc_btn_finish_selector.xml -->

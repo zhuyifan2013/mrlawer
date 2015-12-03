@@ -23,7 +23,7 @@ import com.lawer.mrlawer.util.UiUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends BaseFragment {
 
     private EditText mUsernameEt, mPasswordEt;
     private Button mFinishBtn;
@@ -35,6 +35,9 @@ public class LoginFragment extends Fragment {
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            if(mProgrssDialog.isShowing()) {
+                mProgrssDialog.dismiss();
+            }
             switch (msg.what) {
                 case MSG_LOGIN_SUCCESS:
                     UiUtil.showToast(getActivity(), R.string.login_success);
@@ -85,6 +88,7 @@ public class LoginFragment extends Fragment {
         mFinishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgrssDialog.show();
                 mAccount.setUserName(mUsernameEt.getText().toString());
                 mAccount.setPassword(Coder.encodePassword(mUsernameEt.getText().toString(), mPasswordEt.getText()
                         .toString()));

@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class RegisterFragment extends Fragment {
+public class RegisterFragment extends BaseFragment {
 
     private Button mFillFinishBtn;
     private EditText mUsernameEt, mPasswordEt, mConfirmPwdEt;
@@ -52,11 +52,14 @@ public class RegisterFragment extends Fragment {
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            if (mProgrssDialog.isShowing()) {
+                mProgrssDialog.dismiss();
+            }
             switch (msg.what) {
                 case MSG_REGISTER_SUCCESS:
                     UiUtil.showToast(getActivity(), R.string.register_success);
                     try {
-                        mAccount.fillSelf(((JSONObject)msg.obj).getString(Account.PARAM_ACCOUNT_INFO));
+                        mAccount.fillSelf(((JSONObject) msg.obj).getString(Account.PARAM_ACCOUNT_INFO));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -205,6 +208,7 @@ public class RegisterFragment extends Fragment {
                     mHandler.obtainMessage(MSG_PASSWORD_NOT_SAME).sendToTarget();
                     return;
                 }
+                mProgrssDialog.show();
                 mAccount.setUserName(mUsername);
                 mAccount.setPassword(Coder.encodePassword(mUsername, mPassword));
                 mAccount.setGender(mGender);

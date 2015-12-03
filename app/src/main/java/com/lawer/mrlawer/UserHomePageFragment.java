@@ -17,10 +17,12 @@ import android.widget.TextView;
 import com.lawer.mrlawer.entity.Account;
 import com.lawer.mrlawer.network.RongyunRequest;
 
+import io.rong.imkit.RongIM;
+
 /**
  * A placeholder fragment containing a simple view.
  */
-public class UserHomePageFragment extends Fragment {
+public class UserHomePageFragment extends BaseFragment {
 
     private Button mRegisterBtn, mLoginBtn, mLogoutBtn, mConListBtn, mNextBtn;
     private Spinner mQuesPersonalSp, mQuesCompanySp;
@@ -95,7 +97,9 @@ public class UserHomePageFragment extends Fragment {
         mConListBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RongyunRequest.connect(getActivity(), mAccount.getToken(), ConversationListActivity.class);
+                if (RongIM.getInstance() != null) {
+                    RongIM.getInstance().startConversationList(getActivity());
+                }
             }
         });
         checkLoginStatus();
@@ -106,13 +110,6 @@ public class UserHomePageFragment extends Fragment {
                 startActivity(new Intent(getActivity(), EditQuestionActivity.class));
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        RongyunRequest.connect(getActivity(), "v+sCbFFHLsSsWemtEK6YPN6R9AnKgY3idi59vy4MQiNAKTZ" +
-                "+uYjoaXg0tpiFUaLUX0qCHxqAeYq0g4p+fFz0Dg==");
     }
 
     @Override

@@ -20,13 +20,6 @@
         />
 
     <TextView
-        android:id="@id/rc_progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textColor="@android:color/black"/>
-
-    <TextView
         android:id="@id/rc_content"
         android:textColor="@android:color/white"
         android:background="#7F000000"
@@ -39,4 +32,4 @@
         android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true"
         />
-</RelativeLayout><!-- From: file:/home/yifan/Documents/android_projects/MrLawer/IMKit/src/main/res/layout/rc_item_location_message.xml --><!-- From: file:/home/yifan/Documents/android_projects/MrLawer/IMKit/build/intermediates/bundles/debug/res/layout/rc_item_location_message.xml -->
+</RelativeLayout><!-- From: file:/home/yifan/Documents/anroid_projects/mrlawer/IMKit/src/main/res/layout/rc_item_location_message.xml --><!-- From: file:/home/yifan/Documents/anroid_projects/mrlawer/IMKit/build/intermediates/bundles/debug/res/layout/rc_item_location_message.xml -->

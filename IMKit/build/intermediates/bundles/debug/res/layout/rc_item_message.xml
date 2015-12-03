@@ -66,7 +66,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/rc_sent_status"
+                android:id="@id/rc_sent_status"
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/rc_notification_bg"
                 android:textSize="12sp"
@@ -102,4 +102,4 @@
     </FrameLayout>
 
 
-</RelativeLayout><!-- From: file:/home/yifan/Documents/android_projects/MrLawer/IMKit/src/main/res/layout/rc_item_message.xml -->
+</RelativeLayout><!-- From: file:/home/yifan/Documents/anroid_projects/mrlawer/IMKit/src/main/res/layout/rc_item_message.xml -->
